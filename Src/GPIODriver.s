@@ -47,8 +47,33 @@ __main:
 		orr		r1, #(1<<0)
 		str 	r1, [r0]
 
+		//Set GPIO port mode register to output
+		ldr 	r0, =GPIOA_MODER
+		ldr 	r1, [r0]
+		orr 	r1, #(1<<0)
+		str 	r1, [r0]
 
-stop
+		//Set Output type to open drain
+		ldr 	r0, =GPIOA_OTYPER
+		ldr 	r1, [r0]
+		orr 	r1, #(0<<0)
+		str 	r1, [r0]
+
+		//Set to port pull-down
+		ldr 	r0, =GPIOA_PUPDR
+		ldr 	r1, [r0]
+		orr 	r1, #(1<<1)
+		str 	r1, [r0]
+
+		//Write to ODR
+		ldr 	r0, =GPIOA_ODR
+		ldr 	r1, [r0]
+		orr 	r1, #(1<<0)
+		str 	r1, [r0]
+		bx 		lr
+
+
+stop:
 		b		stop
 		.align
 		.end
