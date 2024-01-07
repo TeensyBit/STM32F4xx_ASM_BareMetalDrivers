@@ -34,7 +34,7 @@
 .equ    GPIOA_AFRL,              AHB1_BASE + GPIOA_AFRL_Offset
 .equ    GPIOA_AFRH,              AHB1_BASE + GPIOA_AFRH_Offset
 
-.equ	DELAY,					5333333
+.equ	DELAY,					 5333333
 
 		.syntax 	unified
 		.cpu 		cortex-m4
