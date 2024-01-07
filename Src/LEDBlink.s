@@ -34,6 +34,8 @@
 .equ    GPIOA_AFRL,              AHB1_BASE + GPIOA_AFRL_Offset
 .equ    GPIOA_AFRH,              AHB1_BASE + GPIOA_AFRH_Offset
 
+.equ	DELAY,					5333333
+
 		.syntax 	unified
 		.cpu 		cortex-m4
 		.thumb
@@ -67,11 +69,15 @@ __main:
 
 		//Write to ODR
 		ldr 	r0, =GPIOA_ODR
+write:
 		ldr 	r1, [r0]
-		orr 	r1, #(1<<0)
+		eor 	r1, #(1<<0)
 		str 	r1, [r0]
-		bx 		lr
 
+		ldr 	r2, =DELAY
+delay:	subs	r2, #1
+		beq		write
+		bne		delay
 
 stop:
 		b		stop
